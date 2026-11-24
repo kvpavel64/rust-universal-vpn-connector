@@ -12,6 +12,12 @@ use super::{
 /// Xray outbound collection used by subscription consumers.
 pub type Nodes = Vec<RootOutboundsItem>;
 
+/// Result of reading a subscription configuration file.
+pub type FileReadResult = std::io::Result<String>;
+
+/// Result of deserializing a JSON configuration document.
+pub type JsonResult<T> = std::result::Result<T, serde_json::Error>;
+
 /// Flexible Xray DNS configuration.
 ///
 /// Xray has a broad, version-dependent DNS schema. Keeping this value-backed

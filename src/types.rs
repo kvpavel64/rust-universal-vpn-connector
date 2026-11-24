@@ -76,7 +76,7 @@ impl fmt::Display for CorrelationId {
 pub struct ComponentAddress(String);
 impl ComponentAddress {
     /// Creates an address. Empty values, control characters, and values over 255 bytes are rejected.
-    pub fn new(value: impl Into<String>) -> Result<Self, Error> {
+    pub fn new(value: impl Into<String>) -> Result<Self> {
         let value = value.into();
         if value.trim().is_empty()
             || value != value.trim()
@@ -112,7 +112,7 @@ impl fmt::Display for ComponentAddress {
 pub struct MailboxCapacity(NonZeroUsize);
 impl MailboxCapacity {
     /// Creates a non-zero queue capacity.
-    pub fn new(value: usize) -> Result<Self, Error> {
+    pub fn new(value: usize) -> Result<Self> {
         NonZeroUsize::new(value)
             .map(Self)
             .ok_or(Error::InvalidMailboxCapacity)
