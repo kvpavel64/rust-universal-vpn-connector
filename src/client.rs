@@ -8,9 +8,7 @@ use tokio::{
 };
 
 use crate::prelude::contracts_prelude::*;
-use crate::prelude::engine_prelude::*;
 use crate::prelude::error_prelude::*;
-use crate::prelude::messaging_prelude::*;
 use crate::prelude::sing_box_prelude::*;
 use crate::prelude::subscription_adapters_prelude::*;
 use crate::prelude::subscription_prelude::*;
@@ -274,7 +272,7 @@ impl VpnClient {
             .await
             .map_err(|_| Error::MessageTimeout)??
             .ok_or(Error::ActorStopped)?;
-        if response.correlation_id != correlation_id {
+        if response.correlation_id != Some(correlation_id) {
             return Err(Error::MessageCorrelationMismatch {
                 expected: correlation_id,
                 actual: response.correlation_id,
