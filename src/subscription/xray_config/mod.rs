@@ -4,14 +4,14 @@
 //! providers. It is intentionally separate from the normalized sing-box [`Node`](crate::Node)
 //! model: conversion between engine formats must be explicit.
 
-mod root;
 mod inbound;
-mod outbound;
-mod routing;
 mod observatory;
+mod outbound;
+mod root;
+mod routing;
 
-pub use root::{FileReadResult, JsonResult, Nodes, Root, RootDns, RootLog};
 pub use inbound::{RootInboundsItem, RootInboundsItemSettings, RootInboundsItemSniffing};
-pub use outbound::*;
-pub use routing::*;
 pub use observatory::{RootBurstObservatory, RootBurstObservatoryPingConfig};
+pub use outbound::*;
+pub use root::{FileReadResult, JsonResult, Nodes, Root, RootDns, RootLog};
+pub use routing::*;

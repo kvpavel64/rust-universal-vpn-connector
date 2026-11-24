@@ -3,8 +3,8 @@ use async_trait::async_trait;
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::Value;
 
-use crate::prelude::types_prelude::*;
 use crate::prelude::error_prelude::*;
+use crate::prelude::types_prelude::*;
 
 /// Opaque JSON payload carried by a [`Message`].
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -12,9 +12,13 @@ use crate::prelude::error_prelude::*;
 pub struct MessagePayload(Value);
 impl MessagePayload {
     /// Wraps a JSON value as a message payload.
-    pub fn new(value: Value) -> Self { Self(value) }
+    pub fn new(value: Value) -> Self {
+        Self(value)
+    }
     /// Serializes a typed domain payload into the transport representation.
-    pub fn from_serializable<T: Serialize>(value: &T) -> std::result::Result<Self, serde_json::Error> {
+    pub fn from_serializable<T: Serialize>(
+        value: &T,
+    ) -> std::result::Result<Self, serde_json::Error> {
         serde_json::to_value(value).map(Self)
     }
     /// Deserializes the payload into a typed domain value.
@@ -22,11 +26,19 @@ impl MessagePayload {
         serde_json::from_value(self.0.clone())
     }
     /// Borrows the underlying JSON value.
-    pub fn as_value(&self) -> &Value { &self.0 }
+    pub fn as_value(&self) -> &Value {
+        &self.0
+    }
     /// Consumes the wrapper and returns the JSON value.
-    pub fn into_value(self) -> Value { self.0 }
+    pub fn into_value(self) -> Value {
+        self.0
+    }
 }
-impl From<Value> for MessagePayload { fn from(value: Value) -> Self { Self::new(value) } }
+impl From<Value> for MessagePayload {
+    fn from(value: Value) -> Self {
+        Self::new(value)
+    }
+}
 
 /// Serializable broker-neutral message envelope.
 ///
@@ -48,7 +60,13 @@ pub struct Message {
 impl Message {
     /// Creates a message with a newly generated UUIDv6 identifier.
     pub fn new(sender: ComponentAddress, payload: impl Into<MessagePayload>) -> Self {
-        Self { id: MessageId::new(), sender, reply_to: None, correlation_id: None, payload: payload.into() }
+        Self {
+            id: MessageId::new(),
+            sender,
+            reply_to: None,
+            correlation_id: None,
+            payload: payload.into(),
+        }
     }
 }
 
@@ -70,5 +88,9 @@ pub trait Mailbox: Send {
 #[async_trait]
 pub trait MessageBus: Send + Sync + 'static {
     /// Registers a mailbox with a logical address and positive queue capacity.
-    async fn register(&self, address: ComponentAddress, capacity: MailboxCapacity) -> Result<Box<dyn Mailbox>>;
+    async fn register(
+        &self,
+        address: ComponentAddress,
+        capacity: MailboxCapacity,
+    ) -> Result<Box<dyn Mailbox>>;
 }

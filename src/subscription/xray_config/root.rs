@@ -5,9 +5,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
 use super::{
-    inbound::RootInboundsItem,
-    observatory::RootBurstObservatory,
-    outbound::RootOutboundsItem,
+    inbound::RootInboundsItem, observatory::RootBurstObservatory, outbound::RootOutboundsItem,
     routing::RootRouting,
 };
 

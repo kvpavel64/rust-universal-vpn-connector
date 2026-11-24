@@ -40,21 +40,23 @@
 #![deny(missing_docs)]
 #![warn(rustdoc::broken_intra_doc_links)]
 
+mod client;
 pub mod contracts;
 pub mod engine;
+mod error;
 pub mod messaging;
+pub mod prelude;
 pub mod subscription;
 pub mod types;
-pub mod prelude;
-mod client;
-mod error;
 
 pub use client::{ClientBuilder, ProxyKind, VpnClient};
-pub use error::{Error, Result};
-pub use types::{ComponentAddress, CorrelationId, MailboxCapacity, MessageId};
-pub use subscription::{Node, Protocol};
-pub use contracts::{EngineConfig, Mailbox, Message, MessageBus, MessagePayload, ProxyEngine, RunningEngine,
-    SubscriptionParser, SubscriptionSource};
+pub use contracts::{
+    EngineConfig, Mailbox, Message, MessageBus, MessagePayload, ProxyEngine, RunningEngine,
+    SubscriptionParser, SubscriptionSource,
+};
 pub use engine::SingBoxEngine;
+pub use error::{Error, Result};
 pub use messaging::TokioMpscBus;
 pub use subscription::{DefaultSubscriptionParser, HttpSubscriptionSource, XrayConfig, XrayNodes};
+pub use subscription::{Node, Protocol};
+pub use types::{ComponentAddress, CorrelationId, MailboxCapacity, MessageId};

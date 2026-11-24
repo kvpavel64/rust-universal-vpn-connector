@@ -1,7 +1,7 @@
 //! Contracts for proxy-engine adapters.
-use std::{net::SocketAddr, path::PathBuf, time::Duration};
 use async_trait::async_trait;
 use serde_json::Value;
+use std::{net::SocketAddr, path::PathBuf, time::Duration};
 
 use crate::prelude::error_prelude::*;
 

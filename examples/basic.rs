@@ -13,7 +13,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .socks_addr(socks)
         .http_addr(http)
         .startup_timeout(Duration::from_secs(15))
-        .build().await?;
+        .build()
+        .await?;
 
     for (index, node) in client.nodes().await.iter().enumerate() {
         println!("{index}: {} ({:?})", node.name, node.protocol);

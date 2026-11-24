@@ -1,6 +1,6 @@
 //! Error types shared by the public API and default adapters.
-use thiserror::Error;
 use crate::prelude::types_prelude::*;
+use thiserror::Error;
 
 /// Crate-wide result type.
 pub type Result<T> = std::result::Result<T, Error>;

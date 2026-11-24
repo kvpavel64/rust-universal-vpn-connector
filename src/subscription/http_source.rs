@@ -11,17 +11,30 @@ pub struct HttpSubscriptionSource {
 }
 
 impl Default for HttpSubscriptionSource {
-    fn default() -> Self { Self { client: reqwest::Client::new() } }
+    fn default() -> Self {
+        Self {
+            client: reqwest::Client::new(),
+        }
+    }
 }
 
 impl HttpSubscriptionSource {
     /// Creates a source with a caller-configured HTTP client.
-    pub fn new(client: reqwest::Client) -> Self { Self { client } }
+    pub fn new(client: reqwest::Client) -> Self {
+        Self { client }
+    }
 }
 
 #[async_trait]
 impl SubscriptionSource for HttpSubscriptionSource {
     async fn fetch(&self, location: &str) -> Result<String> {
-        Ok(self.client.get(location).send().await?.error_for_status()?.text().await?)
+        Ok(self
+            .client
+            .get(location)
+            .send()
+            .await?
+            .error_for_status()?
+            .text()
+            .await?)
     }
 }

@@ -34,8 +34,12 @@ impl Protocol {
     /// Returns the sing-box outbound type string.
     pub fn as_str(self) -> &'static str {
         match self {
-            Self::Vless => "vless", Self::Vmess => "vmess", Self::Trojan => "trojan",
-            Self::Shadowsocks => "shadowsocks", Self::Socks5 => "socks", Self::Http => "http",
+            Self::Vless => "vless",
+            Self::Vmess => "vmess",
+            Self::Trojan => "trojan",
+            Self::Shadowsocks => "shadowsocks",
+            Self::Socks5 => "socks",
+            Self::Http => "http",
             Self::Hysteria2 => "hysteria2",
         }
     }

@@ -1,8 +1,8 @@
 //! Contracts for obtaining and parsing subscription documents.
 use async_trait::async_trait;
 
-use crate::prelude::subscription_prelude::*;
 use crate::prelude::error_prelude::*;
+use crate::prelude::subscription_prelude::*;
 
 /// Fetches a subscription document from a source.
 ///
