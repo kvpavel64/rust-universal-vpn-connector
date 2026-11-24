@@ -3,7 +3,7 @@ use std::sync::Arc;
 
 use async_trait::async_trait;
 use serde_json::json;
-use vpn_client::{Node, Protocol, Result, SubscriptionParser, SubscriptionSource, VpnClient};
+use vpn_client::{Node, Protocol, SubscriptionParser, SubscriptionSource, VpnClient};
 
 struct EmbeddedSource;
 
@@ -33,7 +33,7 @@ impl SubscriptionParser for EmbeddedParser {
 }
 
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
+async fn main() -> std::result::Result<(), Box<dyn std::error::Error>> {
     let client = VpnClient::builder()
         .subscription("embedded://profile")
         .subscription_source(Arc::new(EmbeddedSource))
