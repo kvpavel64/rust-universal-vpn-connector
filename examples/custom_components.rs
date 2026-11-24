@@ -3,7 +3,7 @@ use std::sync::Arc;
 
 use async_trait::async_trait;
 use serde_json::json;
-use vpn_client::{Node, Protocol, SubscriptionParser, SubscriptionSource, VpnClient};
+use vpn_client::{Node, Protocol, Result, SubscriptionParser, SubscriptionSource, VpnClient};
 
 struct EmbeddedSource;
 
